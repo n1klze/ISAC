@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Waybill List</title>
+</head>
+<body>
+    <h1>Waybill List</h1>
+    <ul>
+        {% for waybill in waybills %}
+            <li>
+                <a href="{% url 'waybill_detail' pk=waybill.pk %}">{{ waybill }}</a>
+            </li>
+        {% empty %}
+            <li>No waybills available</li>
+        {% endfor %}
+    </ul>
+    <td>
+        <form action="{% url 'waybill_add' %}" method="post">
+            {% csrf_token %}
+            <button type="submit"> Add</button>
+        </form>
+    </td>
+</body>
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Worker List</title>
+</head>
+<body>
+    <h1>Worker List</h1>
+    <ul>
+        <li><a href="{% url 'driver_list' %}">{{ "Drivers" }}</a></li>
+    
+        <li><a href="{% url 'mechanic_list' %}">{{ "Mechanics" }}</a></li>
+
+        <li><a href="{% url 'technician_list' %}">{{ "Technicians" }}</a></li>
+    
+        <li><a href="{% url 'welder_list' %}">{{ "Welders" }}</a></li>
+
+        <li><a href="{% url 'assembler_list' %}">{{ "Assemblers" }}</a></li>
+    </ul>
+</body>
+</html>

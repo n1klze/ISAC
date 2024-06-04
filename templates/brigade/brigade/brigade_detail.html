@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Brigade Detail</title>
+</head>
+<body>
+    <h1>Brigade Detail</h1>
+    <p>Number: {{ brigade.id }}</p>
+    <p>Brigadier: {{ brigade.brigadier }}</p>
+    <p>District: <a href="{% url 'district_detail' pk=brigade.district.pk %}">{{ brigade.district.id }}</a></p>
+    <p>Assigned workers: 
+        <ul>
+            <li>Drivers:</li>
+            <ol>
+                {% for driver in drivers %}
+                    <li>
+                        <a href="{% url 'driver_detail' pk=driver.pk %}">{{ driver.name }}</a>
+                    </li>
+                {% empty %}
+                    </ol>
+                    <ul>
+                        <li>No drivers available</li>
+                    </ul>
+                    <ol>
+                {% endfor %}
+            </ol>
+            <li>Mechanics:</li>
+            <ol>
+                {% for mechanic in mechanics %}
+                    <li>
+                        <a href="{% url 'mechanic_detail' pk=mechanic.pk %}">{{ mechanic.name }}</a>
+                    </li>
+                {% empty %}
+                    </ol>
+                    <ul>
+                        <li>No mechanics available</li>
+                    </ul>
+                    <ol>
+                {% endfor %}
+            </ol>
+            <li>Technicians:</li>
+            <ol>
+                {% for technician in technicians %}
+                    <li>
+                        <a href="{% url 'technician_detail' pk=technician.pk %}">{{ technician.name }}</a>
+                    </li>
+                {% empty %}
+                    </ol>
+                    <ul>
+                        <li>No technicians available</li>
+                    </ul>
+                    <ol>
+                {% endfor %}
+            </ol>
+            <li>Welders:</li>
+            <ol>
+                {% for welder in welders %}
+                    <li>
+                        <a href="{% url 'welder_detail' pk=welder.pk %}">{{ welder.name }}</a>
+                    </li>
+                {% empty %}
+                    </ol>
+                    <ul>
+                        <li>No welders available</li>
+                    </ul>
+                    <ol>
+                {% endfor %}
+            </ol>
+            <li>Assemblers:</li>
+            <ol>
+                {% for assembler in assemblers %}
+                    <li>
+                        <a href="{% url 'assembler_detail' pk=assembler.pk %}">{{ assembler.name }}</a>
+                    </li>
+                {% empty %}
+                    </ol>
+                    <ul>
+                        <li>No assemblers available</li>
+                    </ul>
+                    <ol>
+                {% endfor %}
+            </ol>
+        </ul>
+    </p>
+</body>
+</html>

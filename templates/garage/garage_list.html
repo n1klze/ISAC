@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Garage List</title>
+</head>
+<body>
+    <h1>Garage List</h1>
+    <ul>
+        {% for garage in garages %}
+            <li>
+                <a href="{% url 'garage_detail' pk=garage.pk %}">{{ garage.id }}</a>
+            </li>
+        {% empty %}
+            <li>No garages available</li>
+        {% endfor %}
+    </ul>
+    <td>
+        <form action="{% url 'garage_add' %}" method="post">
+            {% csrf_token %}
+            <button type="submit"> Add</button>
+        </form>
+    </td>
+</body>
+</html>

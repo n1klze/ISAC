@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Truck List</title>
+</head>
+<body>
+    <h1>Truck List</h1>
+    <ul>
+        {% for truck in trucks %}
+            <li>
+                <a href="{% url 'truck_detail' pk=truck.pk %}">{{ truck.brand }}</a>
+                <form action="{% url 'truck_decommission' pk=truck.pk %}" method="post" style="display:inline;">
+                    {% csrf_token %}
+                    <button type="submit">Decommission</button>
+                </form>
+            </li>
+        {% empty %}
+            <li>No trucks available</li>
+        {% endfor %}
+    </ul>
+    <td>
+        <form action="{% url 'truck_add' %}" method="post">
+            {% csrf_token %}
+            <button type="submit"> Add</button>
+        </form>
+    </td>
+</body>
+</html>

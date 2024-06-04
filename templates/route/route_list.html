@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Route List</title>
+</head>
+<body>
+    <h1>Route List</h1>
+    <ul>
+        {% for route in routes %}
+            <li>
+                <a href="{% url 'route_detail' pk=route.pk %}">{{ route.number }}</a>
+            </li>
+        {% empty %}
+            <li>No routes available</li>
+        {% endfor %}
+    </ul>
+    <td>
+        <form action="{% url 'route_add' %}" method="post">
+            {% csrf_token %}
+            <button type="submit"> Add</button>
+        </form>
+    </td>
+</body>
+</html>

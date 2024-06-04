@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mileage List</title>
+</head>
+<body>
+    <h1>Mileage List</h1>
+
+    <form method="get" action="{% url 'mileage_query' pk=vehicle.pk %}">
+        <label for="start_date">Start Date:</label>
+        <input type="date" id="start_date" name="start_date" required><br>
+
+        <label for="end_date">End Date:</label>
+        <input type="date" id="end_date" name="end_date" required><br>
+
+        <button type="submit">Get mileage</button>
+    </form>
+
+    <h2>Total mileage: {{ total_mileage }} km.</h2>
+
+    <p>Details:
+        <ol>
+            {% for waybill in waybills %}
+                <li>
+                    <a href="{% url 'waybill_detail' pk=waybill.pk %}">{{ waybill }}</a>
+                </li>
+            {% empty %}
+                </ol>
+                <ul>
+                    <li>No waybills available</li>
+                </ul>
+                <ol>
+            {% endfor %}
+        </ol>
+    </p>
+</body>
+</html>

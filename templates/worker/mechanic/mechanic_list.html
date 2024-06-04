@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mechanic List</title>
+</head>
+<body>
+    <h1>Mechanic List</h1>
+    <ul>
+        {% for mechanic in mechanics %}
+            <li>
+                <a href="{% url 'mechanic_detail' pk=mechanic.pk %}">{{ mechanic.name }}</a>
+            </li>
+        {% empty %}
+            <li>No mechanics available</li>
+        {% endfor %}
+    </ul>
+    <td>
+        <form action="{% url 'mechanic_add' %}" method="post">
+            {% csrf_token %}
+            <button type="submit"> Add</button>
+        </form>
+    </td>
+</body>
+</html>

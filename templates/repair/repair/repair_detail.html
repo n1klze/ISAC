@@ -1,0 +1,69 @@
+<!-- waybill_detail.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Repair Detail</title>
+</head>
+<body>
+    <h1>Repair Details</h1>
+    <p>Date: {{ repair.created_at }}</p>
+    <p>Vehicle: 
+        {% if repair.vehicle.truck %}
+            <a href="{% url 'truck_detail' pk=repair.vehicle.pk %}">{{ repair.vehicle.brand }}</a>
+        {% endif %}
+
+        {% if repair.vehicle.bus %}
+            <a href="{% url 'bus_detail' pk=repair.vehicle.pk %}">{{ repair.vehicle.brand }}</a>
+        {% endif %}
+
+        {% if repair.vehicle.taxi %}
+            <a href="{% url 'taxi_detail' pk=repair.vehicle.pk %}">{{ repair.vehicle.brand }}</a>
+        {% endif %}
+
+        {% if repair.vehicle.auxiliary %}
+            <a href="{% url 'auxiliary_detail' pk=repair.vehicle.pk %}">{{ repair.vehicle.brand }}</a>
+        {% endif %}
+    </p>
+    <p>Worker: 
+        {% if repair.worker.driver %}
+            <a href="{% url 'driver_detail' pk=repair.worker.pk %}">{{ repair.worker.name }}</a>
+        {% endif %}
+
+        {% if repair.worker.mechanic %}
+            <a href="{% url 'mechanic_detail' pk=repair.worker.pk %}">{{ repair.worker.name }}</a>
+        {% endif %}
+
+        {% if repair.worker.technician %}
+            <a href="{% url 'technician_detail' pk=repair.worker.pk %}">{{ repair.worker.name }}</a>
+        {% endif %}
+
+        {% if repair.worker.welder %}
+            <a href="{% url 'welder_detail' pk=repair.worker.pk %}">{{ repair.worker.name }}</a>
+        {% endif %}
+
+        {% if repair.worker.assembler %}
+            <a href="{% url 'assembler_detail' pk=repair.worker.pk %}">{{ repair.worker.name }}</a>
+        {% endif %}
+    </p>
+    <p>List of details:</p>
+    <ol>
+        {% for detail in details %}
+            <li>
+                <a href="{% url 'detail_detail' pk=detail.pk %}">{{ detail }}</a>
+            </li>
+        {% empty %}
+            </ol>
+            <ul>
+                <li>No details available</li>
+            </ul>
+            <ol>
+        {% endfor %}
+    </ol>
+    <td>
+        <form action="{% url 'detail_add' %}" method="post">
+            {% csrf_token %}
+            <button type="submit"> Add</button>
+        </form>
+    </td>
+</body>
+</html>

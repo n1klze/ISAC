@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Garage Detail</title>
+</head>
+<body>
+    <h1>Garage Detail</h1>
+    <p>Number: {{ garage.id }}</p>
+    <p>Address: {{ garage.address }}</p>
+    <p>Assigned cars: 
+        <ul>
+            <li>Buses:</li>
+            <ol>
+                {% for bus in buses %}
+                    <li>
+                        <a href="{% url 'bus_detail' pk=bus.pk %}">{{ bus.brand }}</a>
+                    </li>
+                {% empty %}
+                    </ol>
+                    <ul>
+                        <li>No cars available</li>
+                    </ul>
+                    <ol>
+                {% endfor %}
+            </ol>
+            <li>Minibuses:</li>
+            <ol>
+                {% for taxi in taxis %}
+                    <li>
+                        <a href="{% url 'taxi_detail' pk=taxi.pk %}">{{ taxi.brand }}</a>
+                    </li>
+                {% empty %}
+                    </ol>
+                    <ul>
+                        <li>No cars available</li>
+                    </ul>
+                    <ol>
+                {% endfor %}
+            </ol>
+            <li>Trucks:</li>
+            <ol>
+                {% for truck in trucks %}
+                    <li>
+                        <a href="{% url 'truck_detail' pk=truck.pk %}">{{ truck.brand }}</a>
+                    </li>
+                {% empty %}
+                    </ol>
+                    <ul>
+                        <li>No cars available</li>
+                    </ul>
+                    <ol>
+                {% endfor %}
+            </ol>
+            <li>Auxiliary:</li>
+            <ol>
+                {% for auxiliary in auxiliaries %}
+                    <li>
+                        <a href="{% url 'auxiliary_detail' pk=auxiliary.pk %}">{{ auxiliary.brand }}</a>
+                    </li>
+                {% empty %}
+                    </ol>
+                    <ul>
+                        <li>No cars available</li>
+                    </ul>
+                    <ol>
+                {% endfor %}
+            </ol>
+        </ul>
+    </p>
+</body>
+</html>

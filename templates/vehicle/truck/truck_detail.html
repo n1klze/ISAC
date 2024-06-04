@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Truck Detail</title>
+</head>
+<body>
+    <h1>Truck Detail</h1>
+    <p>Brand: {{ truck.brand }}</p>
+    <p>Capacity: {{ truck.capacity }}</p>
+    <p>Received: {{ truck.created_at }}</p>
+    {% if truck.is_decommissioned == 1 %}
+        <p>Decommissioned: {{ truck.modified_at }}</p>
+    {% endif %}
+    <p>Assigned drivers: 
+        <ol>
+            {% for driver in drivers %}
+                <li>
+                    <a href="{% url 'driver_detail' pk=driver.pk %}">{{ driver.name }}</a>
+                </li>
+            {% empty %}
+                </ol>
+                <ul>
+                    <li>No drivers available</li>
+                </ul>
+                <ol>
+            {% endfor %}
+        </ol>
+    </p>
+    <p><a href="{% url 'mileage_query' pk=truck.pk %}"> Get mileage </a></p>
+    <p><a href="{% url 'cargo_query' pk=truck.pk %}"> Get cargo delivery data </a></p>
+    <p><a href="{% url 'repair_query' pk=truck.pk %}"> Get repairs </a></p>
+</body>
+</html>

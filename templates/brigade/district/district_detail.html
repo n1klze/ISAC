@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>District Detail</title>
+</head>
+<body>
+    <h1>District Detail</h1>
+    <p>Number: {{ district.id }}</p>
+    <p>Master: {{ district.master }}</p>
+    <p>Workshop: <a href="{% url 'workshop_detail' pk=district.workshop.pk %}">{{ district.workshop.id }}</a></p>
+    <p>Assigned brigades: 
+        <ul>
+            {% for brigade in brigades %}
+                <li>
+                    <a href="{% url 'brigade_detail' pk=brigade.pk %}">{{ brigade.id }}</a>
+                </li>
+            {% empty %}
+                <li>No drivers available</li>
+            {% endfor %}
+        </ul>
+    </p>
+</body>
+</html>

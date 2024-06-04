@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Taxi Detail</title>
+</head>
+<body>
+    <h1>Taxi Detail</h1>
+    <p>Brand: {{ taxi.brand }}</p>
+    <p>Passenger Capacity: {{ taxi.passenger_capacity }}</p>
+    <p>Received: {{ taxi.created_at }}</p>
+    <p>Route: {{ route.number }}</p>
+    {% if taxi.is_decommissioned == 1 %}
+        <p>Decommissioned: {{ taxi.modified_at }}</p>
+    {% endif %}
+    <p>Assigned drivers: 
+        <ol>
+            {% for driver in drivers %}
+                <li>
+                    <a href="{% url 'driver_detail' pk=driver.pk %}">{{ driver.name }}</a>
+                </li>
+            {% empty %}
+                </ol>
+                <ul>
+                    <li>No drivers available</li>
+                </ul>
+                <ol>
+            {% endfor %}
+        </ol>
+    </p>
+    <p><a href="{% url 'mileage_query' pk=taxi.pk %}"> Get mileage </a></p>
+    <p><a href="{% url 'repair_query' pk=taxi.pk %}"> Get repairs </a></p>
+</body>
+</html>

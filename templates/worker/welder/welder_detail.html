@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Welder Detail</title>
+</head>
+<body>
+    <h1>Welder Detail</h1>
+    <p>Name: {{ welder.name }}</p>
+    <p>Brigade: <a href="{% url 'brigade_detail' pk=welder.brigade.pk %}">{{ welder.brigade.id }}</a></p>
+    <p>Welding machine: {{ welder.welding_machine }}</p>
+    <p><a href="{% url 'work_query' pk=welder.pk %}"> Get repairs </a></p>
+</body>
+</html>

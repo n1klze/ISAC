@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Driver Detail</title>
+</head>
+<body>
+    <h1>Driver Detail</h1>
+    <p>Name: {{ driver.name }}</p>
+    <p>Brigade: <a href="{% url 'brigade_detail' pk=driver.brigade.pk %}">{{ driver.brigade.id }}</a></p>
+    <p>Attached to the car: 
+        {% if driver.vehicle.truck %}
+            <a href="{% url 'truck_detail' pk=driver.vehicle.pk %}">{{ driver.vehicle.brand }}</a>
+        {% endif %}
+
+        {% if driver.vehicle.bus %}
+            <a href="{% url 'bus_detail' pk=driver.vehicle.pk %}">{{ driver.vehicle.brand }}</a>
+        {% endif %}
+
+        {% if driver.vehicle.taxi %}
+            <a href="{% url 'taxi_detail' pk=driver.vehicle.pk %}">{{ driver.vehicle.brand }}</a>
+        {% endif %}
+
+        {% if driver.vehicle.auxiliary %}
+            <a href="{% url 'auxiliary_detail' pk=driver.vehicle.pk %}">{{ driver.vehicle.brand }}</a>
+        {% endif %}
+    </p>
+</body>
+</html>

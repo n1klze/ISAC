@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>District List</title>
+</head>
+<body>
+    <h1>District List</h1>
+    <ul>
+        {% for district in districts %}
+            <li>
+                <a href="{% url 'district_detail' pk=district.pk %}">{{ district.id }}</a>
+            </li>
+        {% empty %}
+            <li>No districts available</li>
+        {% endfor %}
+    </ul>
+    <td>
+        <form action="{% url 'district_add' %}" method="post">
+            {% csrf_token %}
+            <button type="submit"> Add</button>
+        </form>
+    </td>
+</body>
+</html>

@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Assembler Detail</title>
+</head>
+<body>
+    <h1>Assembler Detail</h1>
+    <p>Name: {{ assembler.name }}</p>
+    <p>Brigade: <a href="{% url 'brigade_detail' pk=assembler.brigade.pk %}">{{ assembler.brigade.id }}</a></p>
+    <p>Assembly machine: {{ assembler.assembly_machine }}</p>
+    <p><a href="{% url 'work_query' pk=assembler.pk %}"> Get repairs </a></p>
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Vehicle Detail</title>
+</head>
+<body>
+    <h1>Vehicle Detail</h1>
+    <p>Brand: {{ vehicle.brand }}</p>
+    <p>Decommissioned: {{ vehicle.is_decommissioned }}</p>
+    <p>Created at: {{ vehicle.created_at }}</p>
+    <p>Modified at: {{ vehicle.modified_at }}</p>
+
+    {% if vehicle.truck %}
+        <p>Capacity: {{ vehicle.truck.capacity }}</p>
+    {% endif %}
+
+    {% if vehicle.bus %}
+        <p>Passenger Capacity: {{ vehicle.bus.passenger_capacity }}</p>
+    {% endif %}
+
+    {% if vehicle.taxi %}
+        <p>Passenger Capacity: {{ vehicle.taxi.passenger_capacity }}</p>
+    {% endif %}
+
+    {% if vehicle.auxiliary %}
+        <p>Description: {{ vehicle.auxiliary.description }}</p>
+    {% endif %}
+
+    {% if vehicle.route %}
+        <p>Number: {{ vehicle.route.number }}</p>
+        <p>Vehicle: {{ vehicle.route.vehicle }}</p>
+    {% endif %}
+</body>
+</html>

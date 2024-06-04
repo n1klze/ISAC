@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Workshop List</title>
+</head>
+<body>
+    <h1>Workshop List</h1>
+    <ul>
+        {% for workshop in workshops %}
+            <li>
+                <a href="{% url 'workshop_detail' pk=workshop.pk %}">{{ workshop.id }}</a>
+            </li>
+        {% empty %}
+            <li>No workshops available</li>
+        {% endfor %}
+    </ul>
+    <td>
+        <form action="{% url 'workshop_add' %}" method="post">
+            {% csrf_token %}
+            <button type="submit"> Add</button>
+        </form>
+    </td>
+</body>
+</html>

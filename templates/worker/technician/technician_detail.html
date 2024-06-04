@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Technician Detail</title>
+</head>
+<body>
+    <h1>Technician Detail</h1>
+    <p>Name: {{ technician.name }}</p>
+    <p>Brigade: <a href="{% url 'brigade_detail' pk=technician.brigade.pk %}">{{ technician.brigade.id }}</a></p>
+    <p><a href="{% url 'technician_query' pk=technician.pk %}"> Get repairs </a></p>
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mileage List</title>
+</head>
+<body>
+    <h1>Mileage List</h1>
+
+    <form method="get" action="{% url 'receiving_query' %}">
+        <label for="start_date">Start Date:</label>
+        <input type="date" id="start_date" name="start_date" required><br>
+
+        <label for="end_date">End Date:</label>
+        <input type="date" id="end_date" name="end_date" required><br>
+
+        <label for="is_decommissioned">Decommissioned:</label>
+        <input type="checkbox" id="is_decommissioned" name="is_decommissioned"><br>
+
+        <button type="submit">Get data</button>
+    </form>
+
+    <p>Details:
+        <ul>
+            <li>Trucks:</li>
+            <ol>
+                {% for truck in trucks %}
+                    <li>
+                        <a href="{% url 'truck_detail' pk=truck.pk %}">{{ truck }}</a>
+                    </li>
+                {% empty %}
+                    </ol>
+                    <ul>
+                        <li>No trucks available</li>
+                    </ul>
+                    <ol>
+                {% endfor %}
+            </ol>
+            <li>Buses:</li>
+            <ol>
+                {% for bus in buses %}
+                    <li>
+                        <a href="{% url 'bus_detail' pk=bus.pk %}">{{ bus }}</a>
+                    </li>
+                {% empty %}
+                    </ol>
+                    <ul>
+                        <li>No buses available</li>
+                    </ul>
+                    <ol>
+                {% endfor %}
+            </ol>
+            <li>Taxis:</li>
+            <ol>
+                {% for taxi in taxis %}
+                    <li>
+                        <a href="{% url 'taxi_detail' pk=taxi.pk %}">{{ taxi }}</a>
+                    </li>
+                {% empty %}
+                    </ol>
+                    <ul>
+                        <li>No taxis available</li>
+                    </ul>
+                    <ol>
+                {% endfor %}
+            </ol>
+            <li>Auxiliary vehicles:</li>
+            <ol>
+                {% for auxiliary in auxiliaries %}
+                    <li>
+                        <a href="{% url 'auxiliary_detail' pk=auxiliary.pk %}">{{ auxiliary }}</a>
+                    </li>
+                {% empty %}
+                    </ol>
+                    <ul>
+                        <li>No auxiliaries available</li>
+                    </ul>
+                    <ol>
+                {% endfor %}
+            </ol>
+        </ul>
+    </p>
+</body>
+</html>

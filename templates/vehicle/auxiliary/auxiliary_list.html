@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Auxiliary Vehicle List</title>
+</head>
+<body>
+    <h1>Auxiliary Vehicle List</h1>
+    <ul>
+        {% for auxiliary in auxiliaries %}
+            <li>
+                <a href="{% url 'auxiliary_detail' pk=auxiliary.pk %}">{{ auxiliary.brand }}</a>
+            </li>
+        {% empty %}
+            <li>No auxiliary vehicles available</li>
+        {% endfor %}
+    </ul>
+    <td>
+        <form action="{% url 'auxiliary_add' %}" method="post">
+            {% csrf_token %}
+            <button type="submit"> Add</button>
+        </form>
+    </td>
+</body>
+</html>

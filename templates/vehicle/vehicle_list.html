@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Vehicle List</title>
+</head>
+<body>
+    <h1>Vehicle List</h1>
+    <ul>
+        <li><a href="{% url 'truck_list' %}">{{ "Trucks" }}</a></li>
+    
+        <li><a href="{% url 'bus_list' %}">{{ "Buses" }}</a></li>
+    
+        <li><a href="{% url 'taxi_list' %}">{{ "Taxies" }}</a></li>
+    
+        <li><a href="{% url 'auxiliary_list' %}">{{ "Auxiliary vehicles" }}</a></li>
+    </ul>
+    <p><a href="{% url 'receiving_query' %}"> Get receiving or decommissioned </a></p>
+</body>
+</html>

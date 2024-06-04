@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Assembler List</title>
+</head>
+<body>
+    <h1>Assembler List</h1>
+    <ul>
+        {% for assembler in assemblers %}
+            <li>
+                <a href="{% url 'assembler_detail' pk=assembler.pk %}">{{ assembler.name }}</a>
+            </li>
+        {% empty %}
+            <li>No assemblers available</li>
+        {% endfor %}
+    </ul>
+    <td>
+        <form action="{% url 'assembler_add' %}" method="post">
+            {% csrf_token %}
+            <button type="submit"> Add</button>
+        </form>
+    </td>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Welder List</title>
+</head>
+<body>
+    <h1>Welder List</h1>
+    <ul>
+        {% for welder in welders %}
+            <li>
+                <a href="{% url 'welder_detail' pk=welder.pk %}">{{ welder.name }}</a>
+            </li>
+        {% empty %}
+            <li>No welders available</li>
+        {% endfor %}
+    </ul>
+    <td>
+        <form action="{% url 'welder_add' %}" method="post">
+            {% csrf_token %}
+            <button type="submit"> Add</button>
+        </form>
+    </td>
+</body>
+</html>

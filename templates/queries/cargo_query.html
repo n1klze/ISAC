@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cargo Delivery List</title>
+</head>
+<body>
+    <h1>Cargo Delivery List</h1>
+
+    <form method="get" action="{% url 'cargo_query' pk=vehicle.pk %}">
+        <label for="start_date">Start Date:</label>
+        <input type="date" id="start_date" name="start_date" required><br>
+
+        <label for="end_date">End Date:</label>
+        <input type="date" id="end_date" name="end_date" required><br>
+
+        <button type="submit">Get cargo delivery data</button>
+    </form>
+
+    <p>Details:
+        <ol>
+            {% for waybill in waybills %}
+                <li>
+                    <a href="{% url 'cargo_waybill_detail' pk=waybill.pk %}">{{ waybill }}</a>
+                </li>
+                <ol>
+                    {% for cargo_waybill in cargo_waybills %}
+                        {% if cargo_waybill.waybill == waybill %}
+                            <li>
+                                <p>{{ cargo_waybill }}</p>
+                            </li>
+                        {% endif %}
+                    {% empty %}
+                        </ol>
+                        <ul>
+                            <li>No cargo available</li>
+                        </ul>
+                        <ol>
+                    {% endfor %}
+                </ol>
+            {% empty %}
+                </ol>
+                <ul>
+                    <li>No waybills available</li>
+                </ul>
+                <ol>
+            {% endfor %}
+        </ol>
+    </p>
+</body>
+</html>

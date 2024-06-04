@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Driver List</title>
+</head>
+<body>
+    <h1>Driver List</h1>
+    <ul>
+        {% for driver in drivers %}
+            <li>
+                <a href="{% url 'driver_detail' pk=driver.pk %}">{{ driver.name }}</a>
+            </li>
+        {% empty %}
+            <li>No drivers available</li>
+        {% endfor %}
+    </ul>
+    <td>
+        <form action="{% url 'driver_add' %}" method="post">
+            {% csrf_token %}
+            <button type="submit"> Add</button>
+        </form>
+    </td>
+</body>
+</html>

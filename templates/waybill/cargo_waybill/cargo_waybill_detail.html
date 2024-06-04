@@ -1,0 +1,51 @@
+<!-- waybill_detail.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Waybill Detail</title>
+</head>
+<body>
+    <h1>Waybill Details</h1>
+    <p>Waybill ID: {{ waybill.pk }}</p>
+    <p>Created At: {{ waybill.created_at }}</p>
+    <p>Mileage: {{ waybill.mileage }} km.</p>
+    <p>Driver: <a href="{% url 'driver_detail' pk=waybill.driver.pk %}">{{ waybill.driver.name }}</a></p>
+    <p>Vehicle: 
+        {% if waybill.vehicle.truck %}
+            <a href="{% url 'truck_detail' pk=waybill.vehicle.pk %}">{{ waybill.vehicle.brand }}</a>
+        {% endif %}
+
+        {% if waybill.vehicle.bus %}
+            <a href="{% url 'bus_detail' pk=waybill.vehicle.pk %}">{{ waybill.vehicle.brand }}</a>
+        {% endif %}
+
+        {% if waybill.vehicle.taxi %}
+            <a href="{% url 'taxi_detail' pk=waybill.vehicle.pk %}">{{ waybill.vehicle.brand }}</a>
+        {% endif %}
+
+        {% if waybill.vehicle.auxiliary %}
+            <a href="{% url 'auxiliary_detail' pk=waybill.vehicle.pk %}">{{ waybill.vehicle.brand }}</a>
+        {% endif %}
+    </p>
+    <p>List of products:</p>
+    <ol>
+        {% for cargo_waybill in cargo_waybills %}
+            <li>
+                <p>{{ cargo_waybill.product }} — {{ cargo_waybill.cost }} rub.</p>
+            </li>
+        {% empty %}
+            </ol>
+            <ul>
+                <li>No products available</li>
+            </ul>
+            <ol>
+        {% endfor %}
+    </ol>
+    <td>
+        <form action="{% url 'cargo_waybill_add' %}" method="post">
+            {% csrf_token %}
+            <button type="submit"> Add</button>
+        </form>
+    </td>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>repair List</title>
+</head>
+<body>
+    <h1>Repair List</h1>
+    <ul>
+        {% for repair in repairs %}
+            <li>
+                <a href="{% url 'repair_detail' pk=repair.pk %}">{{ repair }}</a>
+            </li>
+        {% empty %}
+            <li>No repairs available</li>
+        {% endfor %}
+    </ul>
+    <td>
+        <form action="{% url 'repair_add' %}" method="post">
+            {% csrf_token %}
+            <button type="submit"> Add</button>
+        </form>
+    </td>
+</body>
+</html>

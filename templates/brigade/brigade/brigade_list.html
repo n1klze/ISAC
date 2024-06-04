@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Brigade List</title>
+</head>
+<body>
+    <h1>Brigade List</h1>
+    <ul>
+        {% for brigade in brigades %}
+            <li>
+                <a href="{% url 'brigade_detail' pk=brigade.pk %}">{{ brigade.id }}</a>
+            </li>
+        {% empty %}
+            <li>No brigades available</li>
+        {% endfor %}
+    </ul>
+    <td>
+        <form action="{% url 'brigade_add' %}" method="post">
+            {% csrf_token %}
+            <button type="submit"> Add</button>
+        </form>
+    </td>
+</body>
+</html>

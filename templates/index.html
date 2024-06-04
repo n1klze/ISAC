@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+</head>
+<body>
+    <h1>Welcome to the Main Page ISTO</h1>
+    <p>
+        <a href="{% url 'vehicle_list' %}">
+            Cars
+        </a>
+    </p>
+    <p>
+        <a href="{% url 'worker_list' %}">
+            Workers
+        </a>
+    </p>
+    <p>
+        <a href="{% url 'route_list' %}">
+            Routes
+        </a>
+    </p>
+    <p>
+        <a href="{% url 'team_list' %}">
+            Production teams
+        </a>
+    </p>
+    <p>
+        <a href="{% url 'garage_list' %}">
+            Garages
+        </a>
+    </p>
+    <p>
+        <a href="{% url 'bill_list' %}">
+            Waybills
+        </a>
+    </p>
+    <p>
+        <a href="{% url 'repair_list' %}">
+            Repairs
+        </a>
+    </p>
+</body>
+</html>

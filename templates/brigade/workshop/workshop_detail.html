@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Workshop Detail</title>
+</head>
+<body>
+    <h1>Workshop Detail</h1>
+    <p>Number: {{ workshop.id }}</p>
+    <p>Head: {{ workshop.head }}</p>
+    <p>Assigned districts: 
+        <ul>
+            {% for district in districts %}
+                <li>
+                    <a href="{% url 'district_detail' pk=district.pk %}">{{ district.id }}</a>
+                </li>
+            {% empty %}
+                <li>No districts available</li>
+            {% endfor %}
+        </ul>
+    </p>
+</body>
+</html>

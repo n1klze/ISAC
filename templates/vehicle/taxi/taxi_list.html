@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Taxi List</title>
+</head>
+<body>
+    <h1>Taxi List</h1>
+    <ul>
+        {% for taxi in taxis %}
+            <li>
+                <a href="{% url 'taxi_detail' pk=taxi.pk %}">{{ taxi.brand }}</a>
+            </li>
+        {% empty %}
+            <li>No taxis available</li>
+        {% endfor %}
+    </ul>
+    <td>
+        <form action="{% url 'taxi_add' %}" method="post">
+            {% csrf_token %}
+            <button type="submit"> Add</button>
+        </form>
+    </td>
+</body>
+</html>
