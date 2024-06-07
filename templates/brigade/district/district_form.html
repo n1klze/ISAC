@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% if form.instance.id %}Edit District{% else %}Add District{% endif %}</title>
+</head>
+<body>
+    <h1>{% if form.instance.id %}Edit District{% else %}Add District{% endif %}</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="button">{% if form.instance.id %}Update{% else %}Add{% endif %}</button>
+    </form>
+    <a href="{% url 'district_list' %}" class="button">Back to list</a>
+</body>
+</html>

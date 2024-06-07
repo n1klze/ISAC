@@ -7,9 +7,15 @@
     <h1>Taxi List</h1>
     <ul>
         {% for taxi in taxis %}
-            <li>
-                <a href="{% url 'taxi_detail' pk=taxi.pk %}">{{ taxi.brand }}</a>
-            </li>
+            {% if taxi.is_decommissioned == 0 %}
+                <li>
+                    <a href="{% url 'taxi_detail' pk=taxi.pk %}">{{ taxi.brand }}</a>
+                    <form action="{% url 'taxi_decommission' pk=taxi.pk %}" method="get" style="display:inline;">
+                        {% csrf_token %}
+                        <button type="submit">Decommission</button>
+                    </form>
+                </li>
+            {% endif %}
         {% empty %}
             <li>No taxis available</li>
         {% endfor %}

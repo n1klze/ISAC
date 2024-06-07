@@ -1,5 +1,3 @@
-import datetime
-
 from django import forms
 from vehicle.models import Vehicle
 
@@ -11,19 +9,25 @@ class DateInput(forms.DateInput):
 
 
 class WaybillForm(forms.ModelForm):
-    created_at = forms.DateField(
-        widget=DateInput(format="%d/%m/%Y"),
-        initial=datetime.date.today,
-        label="Date of employment",
-    )
     vehicle = forms.ModelChoiceField(queryset=Vehicle.objects.all(), required=False)
 
     class Meta:
         model = Waybill
-        fields = ["driver", "mileage"]
+        fields = ["driver", "mileage", "created_at"]
+        widgets = {"created_at": DateInput(format="%d/%m/%Y")}
+        labels = {"created_at": "Date of employment"}
+
+    def __init__(self, *args, **kwargs):
+        instance = kwargs.get("instance", None)
+
+        super(WaybillForm, self).__init__(*args, **kwargs)
+
+        if instance:
+            self.initial["created_at"] = instance.created_at
+            self.initial["vehicle"] = Vehicle.objects.get(pk=instance.vehicle.pk)
 
 
 class CargoWaybillForm(forms.ModelForm):
     class Meta:
         model = CargoWaybill
-        fields = ["product", "cost", "waybill"]
+        fields = ["product", "cost"]

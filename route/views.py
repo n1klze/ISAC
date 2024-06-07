@@ -27,4 +27,26 @@ def route_add(request):
             return redirect("route_list")
     else:
         form = RouteForm()
-    return render(request, "route/route_add.html", {"form": form})
+    return render(request, "route/route_form.html", {"form": form})
+
+
+def route_edit(request, pk):
+    route = get_object_or_404(Route, pk=pk)
+    if request.method == "POST":
+        form = RouteForm(request.POST, instance=route)
+        if form.is_valid():
+            form.save()
+            return redirect("route_list")
+    else:
+        form = RouteForm(instance=route)
+    return render(request, "route/route_form.html", {"form": form})
+
+
+def route_delete(request, pk):
+    route = get_object_or_404(Route, pk=pk)
+    if request.method == "POST":
+        Bus.objects.filter(route=route).update(route=None)
+        Taxi.objects.filter(route=route).update(route=None)
+        route.delete()
+        return redirect("route_list")
+    return render(request, "route/route_delete.html", {"route": route})

@@ -5,6 +5,7 @@
 </head>
 <body>
     <h1>Detail Detail</h1>
+    <a href="{% url 'detail_edit' detail.id %}" class="button">Edit</a>
     <p>Name: {{ detail.name }}</p>
     <p>Cost: {{ detail.cost }} rub.</p>
     <p>Amount: {{ detail.amount }}</p>

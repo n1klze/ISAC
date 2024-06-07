@@ -5,6 +5,7 @@
 </head>
 <body>
     <h1>Truck Detail</h1>
+    <a href="{% url 'truck_edit' truck.id %}" class="button">Edit</a>
     <p>Brand: {{ truck.brand }}</p>
     <p>Capacity: {{ truck.capacity }}</p>
     <p>Received: {{ truck.created_at }}</p>

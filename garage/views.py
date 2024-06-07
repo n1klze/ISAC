@@ -1,3 +1,5 @@
+from django.contrib import messages
+from django.db.models import ProtectedError
 from django.shortcuts import get_object_or_404, redirect, render
 from vehicle.models import Auxiliary, Bus, Taxi, Truck
 
@@ -35,4 +37,28 @@ def garage_add(request):
             return redirect("garage_list")
     else:
         form = GarageForm()
-    return render(request, "garage/garage_add.html", {"form": form})
+    return render(request, "garage/garage_form.html", {"form": form})
+
+
+def garage_edit(request, pk):
+    garage = get_object_or_404(Garage, pk=pk)
+    if request.method == "POST":
+        form = GarageForm(request.POST, instance=garage)
+        if form.is_valid():
+            form.save()
+            return redirect("garage_list")
+    else:
+        form = GarageForm(instance=garage)
+    return render(request, "garage/garage_form.html", {"form": form})
+
+
+def garage_delete(request, pk):
+    garage = get_object_or_404(Garage, pk=pk)
+    if request.method == "POST":
+        try:
+            garage.delete()
+        except ProtectedError:
+            messages.error(request, "There are still cars in the garage.")
+            return render(request, "garage/garage_delete.html", {"garage": garage})
+        return redirect("garage_list")
+    return render(request, "garage/garage_delete.html", {"garage": garage})

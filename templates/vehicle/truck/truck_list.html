@@ -7,13 +7,15 @@
     <h1>Truck List</h1>
     <ul>
         {% for truck in trucks %}
-            <li>
-                <a href="{% url 'truck_detail' pk=truck.pk %}">{{ truck.brand }}</a>
-                <form action="{% url 'truck_decommission' pk=truck.pk %}" method="post" style="display:inline;">
-                    {% csrf_token %}
-                    <button type="submit">Decommission</button>
-                </form>
-            </li>
+            {% if truck.is_decommissioned == 0 %}
+                <li>
+                    <a href="{% url 'truck_detail' pk=truck.pk %}">{{ truck.brand }}</a>
+                    <form action="{% url 'truck_decommission' pk=truck.pk %}" method="get" style="display:inline;">
+                        {% csrf_token %}
+                        <button type="submit">Decommission</button>
+                    </form>
+                </li>
+            {% endif %}
         {% empty %}
             <li>No trucks available</li>
         {% endfor %}

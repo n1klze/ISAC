@@ -5,6 +5,11 @@
 </head>
 <body>
     <h1>Garage Detail</h1>
+    <a href="{% url 'garage_edit' garage.id %}" class="button">Edit</a>
+    <form action="{% url 'garage_delete' garage.pk %}" method="get" style="display:inline;">
+        {% csrf_token %}
+        <button type="submit" class="button delete">Delete</button>
+    </form>
     <p>Number: {{ garage.id }}</p>
     <p>Address: {{ garage.address }}</p>
     <p>Assigned cars: 

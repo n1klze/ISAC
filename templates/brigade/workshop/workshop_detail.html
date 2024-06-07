@@ -5,6 +5,11 @@
 </head>
 <body>
     <h1>Workshop Detail</h1>
+    <a href="{% url 'workshop_edit' workshop.id %}" class="button">Edit</a>
+    <form action="{% url 'workshop_delete' workshop.pk %}" method="get" style="display:inline;">
+        {% csrf_token %}
+        <button type="submit" class="button delete">Delete</button>
+    </form>
     <p>Number: {{ workshop.id }}</p>
     <p>Head: {{ workshop.head }}</p>
     <p>Assigned districts: 

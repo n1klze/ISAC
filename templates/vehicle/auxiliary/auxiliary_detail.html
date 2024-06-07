@@ -5,6 +5,7 @@
 </head>
 <body>
     <h1>Auxiliary vehicle Detail</h1>
+    <a href="{% url 'auxiliary_edit' auxiliary.id %}" class="button">Edit</a>
     <p>Brand: {{ auxiliary.brand }}</p>
     <p>Description: {{ auxiliary.description }}</p>
     <p>Received: {{ auxiliary.created_at }}</p>

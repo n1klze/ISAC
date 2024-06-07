@@ -5,6 +5,11 @@
 </head>
 <body>
     <h1>Welder Detail</h1>
+    <a href="{% url 'welder_edit' welder.id %}" class="button">Edit</a>
+    <form action="{% url 'welder_delete' welder.pk %}" method="get" style="display:inline;">
+        {% csrf_token %}
+        <button type="submit" class="button delete">Delete</button>
+    </form>
     <p>Name: {{ welder.name }}</p>
     <p>Brigade: <a href="{% url 'brigade_detail' pk=welder.brigade.pk %}">{{ welder.brigade.id }}</a></p>
     <p>Welding machine: {{ welder.welding_machine }}</p>

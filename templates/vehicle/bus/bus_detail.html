@@ -5,10 +5,13 @@
 </head>
 <body>
     <h1>Bus Detail</h1>
+    <a href="{% url 'bus_edit' bus.id %}" class="button">Edit</a>
     <p>Brand: {{ bus.brand }}</p>
     <p>Passenger Capacity: {{ bus.passenger_capacity }}</p>
     <p>Received: {{ bus.created_at }}</p>
-    <p>Route: {{ route.number }}</p>
+    {% if route %}
+        <p>Route: {{ route.number }}</p>
+    {% endif %}
     {% if bus.is_decommissioned == 1 %}
         <p>Decommissioned: {{ bus.modified_at }}</p>
     {% endif %}

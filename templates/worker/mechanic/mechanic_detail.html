@@ -5,6 +5,11 @@
 </head>
 <body>
     <h1>Mechanic Detail</h1>
+    <a href="{% url 'mechanic_edit' mechanic.id %}" class="button">Edit</a>
+    <form action="{% url 'mechanic_delete' mechanic.pk %}" method="get" style="display:inline;">
+        {% csrf_token %}
+        <button type="submit" class="button delete">Delete</button>
+    </form>
     <p>Name: {{ mechanic.name }}</p>
     <p>Brigade: <a href="{% url 'brigade_detail' pk=mechanic.brigade.pk %}">{{ mechanic.brigade.id }}</a></p>
     <p><a href="{% url 'work_query' pk=mechanic.pk %}"> Get repairs </a></p>

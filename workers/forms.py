@@ -1,5 +1,3 @@
-import datetime
-
 from django import forms
 from vehicle.models import Vehicle
 
@@ -11,61 +9,51 @@ class DateInput(forms.DateInput):
 
 
 class DriverForm(forms.ModelForm):
-    created_at = forms.DateField(
-        widget=DateInput(format="%d/%m/%Y"),
-        initial=datetime.date.today,
-        label="Date of employment",
-    )
     vehicle = forms.ModelChoiceField(queryset=Vehicle.objects.all(), required=False)
 
     class Meta:
         model = Driver
-        fields = ["name", "brigade"]
+        fields = ["name", "brigade", "created_at"]
+        widgets = {"created_at": DateInput(format="%d/%m/%Y")}
+        labels = {"created_at": "Date of employment"}
+
+    def __init__(self, *args, **kwargs):
+        instance = kwargs.get("instance", None)
+
+        super(DriverForm, self).__init__(*args, **kwargs)
+
+        if instance:
+            self.initial["created_at"] = instance.created_at
+            self.initial["vehicle"] = Vehicle.objects.get(pk=instance.vehicle.pk)
 
 
 class MechanicForm(forms.ModelForm):
-    created_at = forms.DateField(
-        widget=DateInput(format="%d/%m/%Y"),
-        initial=datetime.date.today,
-        label="Date of employment",
-    )
-
     class Meta:
         model = Mechanic
-        fields = ["name", "brigade"]
+        fields = ["name", "brigade", "created_at"]
+        widgets = {"created_at": DateInput(format="%d/%m/%Y")}
+        labels = {"created_at": "Date of employment"}
 
 
 class TechnicianForm(forms.ModelForm):
-    created_at = forms.DateField(
-        widget=DateInput(format="%d/%m/%Y"),
-        initial=datetime.date.today,
-        label="Date of employment",
-    )
-
     class Meta:
         model = Technician
-        fields = ["name", "brigade"]
+        fields = ["name", "brigade", "created_at"]
+        widgets = {"created_at": DateInput(format="%d/%m/%Y")}
+        labels = {"created_at": "Date of employment"}
 
 
 class WelderForm(forms.ModelForm):
-    created_at = forms.DateField(
-        widget=DateInput(format="%d/%m/%Y"),
-        initial=datetime.date.today,
-        label="Date of employment",
-    )
-
     class Meta:
         model = Welder
-        fields = ["name", "brigade", "welding_machine"]
+        fields = ["name", "brigade", "welding_machine", "created_at"]
+        widgets = {"created_at": DateInput(format="%d/%m/%Y")}
+        labels = {"created_at": "Date of employment"}
 
 
 class AssemblerForm(forms.ModelForm):
-    created_at = forms.DateField(
-        widget=DateInput(format="%d/%m/%Y"),
-        initial=datetime.date.today,
-        label="Date of employment",
-    )
-
     class Meta:
         model = Assembler
-        fields = ["name", "brigade", "assembly_machine"]
+        fields = ["name", "brigade", "assembly_machine", "created_at"]
+        widgets = {"created_at": DateInput(format="%d/%m/%Y")}
+        labels = {"created_at": "Date of employment"}

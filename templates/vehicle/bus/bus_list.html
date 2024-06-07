@@ -7,9 +7,15 @@
     <h1>Bus List</h1>
     <ul>
         {% for bus in buses %}
-            <li>
-                <a href="{% url 'bus_detail' pk=bus.pk %}">{{ bus.brand }}</a>
-            </li>
+            {% if bus.is_decommissioned == 0 %}
+                <li>
+                    <a href="{% url 'bus_detail' pk=bus.pk %}">{{ bus.brand }}</a>
+                    <form action="{% url 'bus_decommission' pk=bus.pk %}" method="get" style="display:inline;">
+                        {% csrf_token %}
+                        <button type="submit">Decommission</button>
+                    </form>
+                </li>
+            {% endif %}
         {% empty %}
             <li>No buses available</li>
         {% endfor %}

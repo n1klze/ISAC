@@ -5,6 +5,11 @@
 </head>
 <body>
     <h1>Assembler Detail</h1>
+    <a href="{% url 'assembler_edit' assembler.id %}" class="button">Edit</a>
+    <form action="{% url 'assembler_delete' assembler.pk %}" method="get" style="display:inline;">
+        {% csrf_token %}
+        <button type="submit" class="button delete">Delete</button>
+    </form>
     <p>Name: {{ assembler.name }}</p>
     <p>Brigade: <a href="{% url 'brigade_detail' pk=assembler.brigade.pk %}">{{ assembler.brigade.id }}</a></p>
     <p>Assembly machine: {{ assembler.assembly_machine }}</p>

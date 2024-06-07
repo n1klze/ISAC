@@ -20,7 +20,7 @@ class Repair(models.Model):
     created_at = models.DateField()
 
     def __str__(self) -> str:
-        return f"{self.created_at} произведён ремонт автомобиля {self.vehicle} работником {self.worker}"
+        return f"{self.created_at} произведён ремонт автомобиля {self.vehicle}"
 
 
 class Detail(models.Model):

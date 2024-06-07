@@ -5,6 +5,11 @@
 </head>
 <body>
     <h1>Route Detail</h1>
+    <a href="{% url 'route_edit' route.id %}" class="button">Edit</a>
+    <form action="{% url 'route_delete' route.pk %}" method="get" style="display:inline;">
+        {% csrf_token %}
+        <button type="submit" class="button delete">Delete</button>
+    </form>
     <p>Number: {{ route.number }}</p>
     <p>Assigned cars: 
         <ul>

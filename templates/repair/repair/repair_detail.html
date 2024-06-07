@@ -6,6 +6,11 @@
 </head>
 <body>
     <h1>Repair Details</h1>
+    <a href="{% url 'repair_edit' repair.id %}" class="button">Edit</a>
+    <form action="{% url 'repair_delete' repair.pk %}" method="get" style="display:inline;">
+        {% csrf_token %}
+        <button type="submit" class="button delete">Delete</button>
+    </form>
     <p>Date: {{ repair.created_at }}</p>
     <p>Vehicle: 
         {% if repair.vehicle.truck %}
@@ -50,6 +55,10 @@
         {% for detail in details %}
             <li>
                 <a href="{% url 'detail_detail' pk=detail.pk %}">{{ detail }}</a>
+                <form action="{% url 'detail_delete' pk=detail.pk %}" method="get" style="display:inline;">
+                    {% csrf_token %}
+                    <button type="submit" class="button delete">Delete</button>
+                </form>
             </li>
         {% empty %}
             </ol>

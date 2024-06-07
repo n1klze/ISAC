@@ -11,7 +11,7 @@ class Workshop(models.Model):
 
 class District(models.Model):
     master = models.CharField(max_length=50)
-    workshop = models.OneToOneField(Workshop, on_delete=models.CASCADE)
+    workshop = models.OneToOneField(Workshop, on_delete=models.PROTECT)
 
     def __str__(self) -> str:
         return f"Участок №{self.pk}. Мастер: {self.master}"
@@ -19,7 +19,7 @@ class District(models.Model):
 
 class Brigade(models.Model):
     brigadier = models.CharField(max_length=50)
-    district = models.OneToOneField(District, on_delete=models.CASCADE)
+    district = models.OneToOneField(District, on_delete=models.PROTECT)
 
     def __str__(self) -> str:
         return f"Бригада №{self.pk}. Бригадир: {self.brigadier}"

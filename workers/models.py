@@ -16,8 +16,8 @@ class Worker(models.Model):
 
 
 class Driver(Worker):
-    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
-    object_id = models.PositiveIntegerField()
+    content_type = models.ForeignKey(ContentType, null=True, on_delete=models.CASCADE)
+    object_id = models.PositiveIntegerField(null=True)
     vehicle = GenericForeignKey("content_type", "object_id")
 
     def __str__(self) -> str:

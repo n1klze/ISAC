@@ -5,10 +5,13 @@
 </head>
 <body>
     <h1>Taxi Detail</h1>
+    <a href="{% url 'taxi_edit' taxi.id %}" class="button">Edit</a>
     <p>Brand: {{ taxi.brand }}</p>
     <p>Passenger Capacity: {{ taxi.passenger_capacity }}</p>
     <p>Received: {{ taxi.created_at }}</p>
-    <p>Route: {{ route.number }}</p>
+    {% if route %}
+        <p>Route: {{ route.number }}</p>
+    {% endif %}
     {% if taxi.is_decommissioned == 1 %}
         <p>Decommissioned: {{ taxi.modified_at }}</p>
     {% endif %}

@@ -6,6 +6,11 @@
 </head>
 <body>
     <h1>Waybill Details</h1>
+    <a href="{% url 'waybill_edit' waybill.id %}" class="button">Edit</a>
+    <form action="{% url 'waybill_delete' waybill.pk %}" method="get" style="display:inline;">
+        {% csrf_token %}
+        <button type="submit" class="button delete">Delete</button>
+    </form>
     <p>Waybill ID: {{ waybill.pk }}</p>
     <p>Created At: {{ waybill.created_at }}</p>
     <p>Mileage: {{ waybill.mileage }} km.</p>
@@ -32,6 +37,10 @@
         {% for cargo_waybill in cargo_waybills %}
             <li>
                 <p>{{ cargo_waybill.product }} — {{ cargo_waybill.cost }} rub.</p>
+                <form action="{% url 'cargo_waybill_delete' pk=cargo_waybill.pk %}" method="get" style="display:inline;">
+                    {% csrf_token %}
+                    <button type="submit" class="button delete">Delete</button>
+                </form>
             </li>
         {% empty %}
             </ol>
@@ -42,7 +51,7 @@
         {% endfor %}
     </ol>
     <td>
-        <form action="{% url 'cargo_waybill_add' %}" method="post">
+        <form action="{% url 'cargo_waybill_add' waybill.id %}" method="post">
             {% csrf_token %}
             <button type="submit"> Add</button>
         </form>
