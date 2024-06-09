@@ -1,3 +1,4 @@
+from django.contrib.contenttypes.models import ContentType
 from django.db.models import Q
 from django.shortcuts import get_object_or_404, render
 from repair.models import Detail, Repair
@@ -31,6 +32,28 @@ def mileage_query(request, pk):
         "total_mileage": total_mileage,
     }
     return render(request, "queries/mileage_query.html", context)
+
+
+def category_mileage_query(request, category):
+    content_type = ContentType.objects.get(app_label="vehicle", model=category)
+    start_date = request.GET.get("start_date")
+    end_date = request.GET.get("end_date")
+
+    if content_type and start_date and end_date:
+        waybills = Waybill.objects.filter(
+            Q(content_type=content_type) & Q(created_at__range=(start_date, end_date))
+        )
+        total_mileage = sum(waybill.mileage for waybill in waybills)
+    else:
+        waybills = Waybill.objects.none()
+        total_mileage = 0
+
+    context = {
+        "category": category,
+        "waybills": waybills,
+        "total_mileage": total_mileage,
+    }
+    return render(request, "queries/category_mileage_query.html", context)
 
 
 def cargo_query(request, pk):
@@ -75,6 +98,28 @@ def repair_query(request, pk):
         "details": details,
     }
     return render(request, "queries/repair_query.html", context)
+
+
+def category_repair_query(request, category):
+    content_type = ContentType.objects.get(app_label="vehicle", model=category)
+    start_date = request.GET.get("start_date")
+    end_date = request.GET.get("end_date")
+
+    if content_type and start_date and end_date:
+        repairs = Repair.objects.filter(
+            Q(vehicle_type=content_type) & Q(created_at__range=(start_date, end_date))
+        )
+        details = Detail.objects.select_related("repair")
+    else:
+        repairs = Repair.objects.none()
+        details = Detail.objects.none()
+
+    context = {
+        "category": category,
+        "repairs": repairs,
+        "details": details,
+    }
+    return render(request, "queries/category_repair_query.html", context)
 
 
 def work_query(request, pk):

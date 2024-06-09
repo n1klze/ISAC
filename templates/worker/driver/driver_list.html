@@ -2,8 +2,11 @@
 <html>
 <head>
     <title>Driver List</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static "style.css" %}"/>
 </head>
 <body>
+    {% include "components/header.html" %}
     <h1>Driver List</h1>
     <ul>
         {% for driver in drivers %}
@@ -15,7 +18,7 @@
         {% endfor %}
     </ul>
     <td>
-        <form action="{% url 'driver_add' %}" method="post">
+        <form class="form" action="{% url 'driver_add' %}" method="post">
             {% csrf_token %}
             <button type="submit"> Add</button>
         </form>

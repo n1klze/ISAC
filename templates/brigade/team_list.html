@@ -2,8 +2,11 @@
 <html>
 <head>
     <title>Production Teams List</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static "style.css" %}"/>
 </head>
 <body>
+    {% include "components/header.html" %}
     <h1>Production Teams List</h1>
     <ul>
         <li><a href="{% url 'brigade_list' %}">{{ "Brigades" }}</a></li>

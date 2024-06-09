@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Repair List</title>
+</head>
+<body>
+    <h1>Repair List</h1>
+
+    <form method="get" action="{% url 'category_repair_query' category=category %}">
+        <label for="start_date">Start Date:</label>
+        <input type="date" id="start_date" name="start_date" required><br>
+
+        <label for="end_date">End Date:</label>
+        <input type="date" id="end_date" name="end_date" required><br>
+
+        <button type="submit">Get repairs</button>
+    </form>
+
+    <p>Details:
+        <ol>
+            {% for repair in repairs %}
+                <li>
+                    <a href="{% url 'repair_detail' pk=repair.pk %}">{{ repair }}</a>
+                </li>
+                <ol>
+                    {% for detail in details %}
+                        {% if detail.repair == repair %}
+                            <li>
+                                <a href="{% url 'detail_detail' pk=detail.pk %}">{{ detail }}</a>
+                            </li>
+                        {% endif %}
+                    {% empty %}
+                        </ol>
+                        <ul>
+                            <li>No details available</li>
+                        </ul>
+                        <ol>
+                    {% endfor %}
+                </ol>
+            {% empty %}
+                </ol>
+                <ul>
+                    <li>No repairs available</li>
+                </ul>
+                <ol>
+            {% endfor %}
+        </ol>
+    </p>
+</body>
+</html>

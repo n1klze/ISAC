@@ -2,8 +2,11 @@
 <html>
 <head>
     <title>Mechanic List</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static "style.css" %}"/>
 </head>
 <body>
+    {% include "components/header.html" %}
     <h1>Mechanic List</h1>
     <ul>
         {% for mechanic in mechanics %}
@@ -15,7 +18,7 @@
         {% endfor %}
     </ul>
     <td>
-        <form action="{% url 'mechanic_add' %}" method="post">
+        <form class="form" action="{% url 'mechanic_add' %}" method="post">
             {% csrf_token %}
             <button type="submit"> Add</button>
         </form>

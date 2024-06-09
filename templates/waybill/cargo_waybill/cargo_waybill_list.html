@@ -2,8 +2,11 @@
 <html>
 <head>
     <title>Cargo Waybill List</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static "style.css" %}"/>
 </head>
 <body>
+    {% include "components/header.html" %}
     <h1>Cargo Waybill List</h1>
     <ul>
         {% for cargo_waybill in cargo_waybills %}
@@ -15,7 +18,7 @@
         {% endfor %}
     </ul>
     <td>
-        <form action="{% url 'waybill_add' %}" method="post">
+        <form class="form" action="{% url 'waybill_add' %}" method="post">
             {% csrf_token %}
             <button type="submit"> Add</button>
         </form>

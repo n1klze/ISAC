@@ -2,29 +2,34 @@
 <html>
 <head>
     <title>Bus List</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static "style.css" %}"/>
 </head>
 <body>
+    {% include "components/header.html" %}
     <h1>Bus List</h1>
-    <ul>
+    <div class="grid-wrapper">
         {% for bus in buses %}
             {% if bus.is_decommissioned == 0 %}
-                <li>
-                    <a href="{% url 'bus_detail' pk=bus.pk %}">{{ bus.brand }}</a>
+                <div><a href="{% url 'bus_detail' pk=bus.pk %}">{{ bus.brand }}</a></div>
+                <div>    
                     <form action="{% url 'bus_decommission' pk=bus.pk %}" method="get" style="display:inline;">
                         {% csrf_token %}
                         <button type="submit">Decommission</button>
                     </form>
-                </li>
+                </div>
             {% endif %}
         {% empty %}
-            <li>No buses available</li>
+            <div>No buses available</div>
         {% endfor %}
-    </ul>
+    </div>
     <td>
-        <form action="{% url 'bus_add' %}" method="post">
+        <form class="form" action="{% url 'bus_add' %}" method="post">
             {% csrf_token %}
             <button type="submit"> Add</button>
         </form>
     </td>
+    <p><a href="{% url 'category_mileage_query' category='bus' %}"> Get mileage </a></p>
+    <p><a href="{% url 'category_repair_query' category='bus' %}"> Get repairs </a></p>
 </body>
 </html>

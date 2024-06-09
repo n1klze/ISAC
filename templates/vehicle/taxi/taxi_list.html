@@ -2,29 +2,34 @@
 <html>
 <head>
     <title>Taxi List</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static "style.css" %}"/>
 </head>
 <body>
+    {% include "components/header.html" %}
     <h1>Taxi List</h1>
-    <ul>
+    <div class="grid-wrapper">
         {% for taxi in taxis %}
             {% if taxi.is_decommissioned == 0 %}
-                <li>
-                    <a href="{% url 'taxi_detail' pk=taxi.pk %}">{{ taxi.brand }}</a>
+                <div><a href="{% url 'taxi_detail' pk=taxi.pk %}">{{ taxi.brand }}</a></div>
+                <div>    
                     <form action="{% url 'taxi_decommission' pk=taxi.pk %}" method="get" style="display:inline;">
                         {% csrf_token %}
                         <button type="submit">Decommission</button>
                     </form>
-                </li>
+                </div>
             {% endif %}
         {% empty %}
-            <li>No taxis available</li>
+            <div>No taxis available</div>
         {% endfor %}
-    </ul>
+    </div>
     <td>
-        <form action="{% url 'taxi_add' %}" method="post">
+        <form class="form" action="{% url 'taxi_add' %}" method="post">
             {% csrf_token %}
             <button type="submit"> Add</button>
         </form>
     </td>
+    <p><a href="{% url 'category_mileage_query' category='taxi' %}"> Get mileage </a></p>
+    <p><a href="{% url 'category_repair_query' category='taxi' %}"> Get repairs </a></p>
 </body>
 </html>
