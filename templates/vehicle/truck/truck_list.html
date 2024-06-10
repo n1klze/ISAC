@@ -10,17 +10,15 @@
     <h1>Truck List</h1>
     <div class="grid-wrapper">
         {% for truck in trucks %}
-            {% if truck.is_decommissioned == 0 %}
-                <div><a href="{% url 'truck_detail' pk=truck.pk %}">{{ truck.brand }}</a></div>
-                <div>
-                    <form action="{% url 'truck_decommission' pk=truck.pk %}" method="get" style="display:inline;">
-                        {% csrf_token %}
-                        <button type="submit">Decommission</button>
-                    </form>
-                </div>
-            {% endif %}
+            <div><a href="{% url 'truck_detail' pk=truck.pk %}">{{ truck.brand }}</a></div>
+            <div>
+                <form action="{% url 'truck_decommission' pk=truck.pk %}" method="get" style="display:inline;">
+                    {% csrf_token %}
+                    <button type="submit">Decommission</button>
+                </form>
+            </div>
         {% empty %}
-            <div>No trucks available</div>
+            </div><p>No trucks available</p><div>
         {% endfor %}
     </div>
     <td>

@@ -10,17 +10,15 @@
     <h1>Auxiliary Vehicle List</h1>
     <div class="grid-wrapper">
         {% for auxiliary in auxiliaries %}
-            {% if auxiliary.is_decommissioned == 0 %}
-                <div><a href="{% url 'auxiliary_detail' pk=auxiliary.pk %}">{{ auxiliary.brand }}</a></div>
-                <div>    
-                    <form action="{% url 'auxiliary_decommission' pk=auxiliary.pk %}" method="get" style="display:inline;">
-                        {% csrf_token %}
-                        <button type="submit">Decommission</button>
-                    </form>
-                </div>
-            {% endif %}
+            <div><a href="{% url 'auxiliary_detail' pk=auxiliary.pk %}">{{ auxiliary.brand }}</a></div>
+            <div>    
+                <form action="{% url 'auxiliary_decommission' pk=auxiliary.pk %}" method="get" style="display:inline;">
+                    {% csrf_token %}
+                    <button type="submit">Decommission</button>
+                </form>
+            </div>
         {% empty %}
-            <div>No auxiliary vehicles available</div>
+            </div><p>No auxiliary vehicles available</p><div>
         {% endfor %}
     </div>
     <td>

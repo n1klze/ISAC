@@ -10,17 +10,15 @@
     <h1>Bus List</h1>
     <div class="grid-wrapper">
         {% for bus in buses %}
-            {% if bus.is_decommissioned == 0 %}
-                <div><a href="{% url 'bus_detail' pk=bus.pk %}">{{ bus.brand }}</a></div>
-                <div>    
-                    <form action="{% url 'bus_decommission' pk=bus.pk %}" method="get" style="display:inline;">
-                        {% csrf_token %}
-                        <button type="submit">Decommission</button>
-                    </form>
-                </div>
-            {% endif %}
+            <div><a href="{% url 'bus_detail' pk=bus.pk %}">{{ bus.brand }}</a></div>
+            <div>    
+                <form action="{% url 'bus_decommission' pk=bus.pk %}" method="get" style="display:inline;">
+                    {% csrf_token %}
+                    <button type="submit">Decommission</button>
+                </form>
+            </div>
         {% empty %}
-            <div>No buses available</div>
+            </div><p>No buses available</p><div>
         {% endfor %}
     </div>
     <td>

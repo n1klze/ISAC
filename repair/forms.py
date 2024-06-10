@@ -11,7 +11,9 @@ class DateInput(forms.DateInput):
 
 class RepairForm(forms.ModelForm):
     vehicle = forms.ModelChoiceField(queryset=Vehicle.objects.all(), required=True)
-    worker = forms.ModelChoiceField(queryset=Worker.objects.all(), required=True)
+    worker = forms.ModelChoiceField(
+        queryset=Worker.objects.filter(driver__isnull=True), required=True
+    )
 
     class Meta:
         model = Repair

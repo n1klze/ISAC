@@ -20,7 +20,7 @@ def vehicle_detail(request, pk):
 
 
 def truck_list(request):
-    trucks = Truck.objects.all()
+    trucks = Truck.objects.filter(is_decommissioned=False)
     return render(request, "vehicle/truck/truck_list.html", {"trucks": trucks})
 
 
@@ -72,7 +72,7 @@ def truck_decommission(request, pk):
 
 
 def taxi_list(request):
-    taxis = Taxi.objects.all()
+    taxis = Taxi.objects.filter(is_decommissioned=False)
     return render(request, "vehicle/taxi/taxi_list.html", {"taxis": taxis})
 
 
@@ -129,7 +129,7 @@ def taxi_decommission(request, pk):
 
 
 def bus_list(request):
-    buses = Bus.objects.all()
+    buses = Bus.objects.filter(is_decommissioned=False)
     return render(request, "vehicle/bus/bus_list.html", {"buses": buses})
 
 
@@ -186,7 +186,7 @@ def bus_decommission(request, pk):
 
 
 def auxiliary_list(request):
-    auxiliaries = Auxiliary.objects.all()
+    auxiliaries = Auxiliary.objects.filter(is_decommissioned=False)
     return render(
         request, "vehicle/auxiliary/auxiliary_list.html", {"auxiliaries": auxiliaries}
     )

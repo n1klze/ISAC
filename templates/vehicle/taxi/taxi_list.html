@@ -10,17 +10,15 @@
     <h1>Taxi List</h1>
     <div class="grid-wrapper">
         {% for taxi in taxis %}
-            {% if taxi.is_decommissioned == 0 %}
-                <div><a href="{% url 'taxi_detail' pk=taxi.pk %}">{{ taxi.brand }}</a></div>
-                <div>    
-                    <form action="{% url 'taxi_decommission' pk=taxi.pk %}" method="get" style="display:inline;">
-                        {% csrf_token %}
-                        <button type="submit">Decommission</button>
-                    </form>
-                </div>
-            {% endif %}
+            <div><a href="{% url 'taxi_detail' pk=taxi.pk %}">{{ taxi.brand }}</a></div>
+            <div>    
+                <form action="{% url 'taxi_decommission' pk=taxi.pk %}" method="get" style="display:inline;">
+                    {% csrf_token %}
+                    <button type="submit">Decommission</button>
+                </form>
+            </div>
         {% empty %}
-            <div>No taxis available</div>
+            </div><p>No taxis available</p><div>
         {% endfor %}
     </div>
     <td>

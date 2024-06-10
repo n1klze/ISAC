@@ -20,7 +20,7 @@ class TruckForm(forms.ModelForm):
 class BusForm(forms.ModelForm):
     class Meta:
         model = Bus
-        fields = ["brand", "garage", "passenger_capacity", "created_at"]
+        fields = ["brand", "garage", "route", "passenger_capacity", "created_at"]
         widgets = {"created_at": DateInput(format="%d/%m/%Y")}
         labels = {"created_at": "Date of receiving"}
 
@@ -28,7 +28,7 @@ class BusForm(forms.ModelForm):
 class TaxiForm(forms.ModelForm):
     class Meta:
         model = Taxi
-        fields = ["brand", "garage", "passenger_capacity", "created_at"]
+        fields = ["brand", "garage", "route", "passenger_capacity", "created_at"]
         widgets = {"created_at": DateInput(format="%d/%m/%Y")}
         labels = {"created_at": "Date of receiving"}
 
